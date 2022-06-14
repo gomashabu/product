@@ -43,7 +43,6 @@ class PostsTableSeeder extends Seeder
                              Dm    G7    Bb F  F
                             mm mm mm mm mm mm mmmmmmmmm",
                 'song_id' => 1,
-                'user_id' => 1,
                 'artist_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -52,7 +51,6 @@ class PostsTableSeeder extends Seeder
                 'id' => 2,
                 'score' => "load up on guns",
                 'song_id' => 2,
-                'user_id' => 1,
                 'artist_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -61,11 +59,19 @@ class PostsTableSeeder extends Seeder
                 'id' => 3,
                 'score' => "load up on guns and",
                 'song_id' => 2,
-                'user_id' => 2,
                 'artist_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => 4,
+                'score' => "load up on guns and",
+                'song_id' => 3,
+                'artist_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            
         ]);
     }
 }

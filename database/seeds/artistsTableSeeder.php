@@ -24,6 +24,12 @@ class ArtistsTableSeeder extends Seeder
                 'name' => 'Nirvana',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'name' => 'ONE OK ROCK',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

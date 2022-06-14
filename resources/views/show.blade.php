@@ -10,6 +10,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     </head>
     <body>
-        
+        [<a href='/posts/create'>create</a>]
+        <div class='post'>
+            <p>{{ $post->song->title }}</p>
+            <p class='artist'>- {{ $post->artist->name }}</p>
+            <h8 class='user'>{{ $post->user_id }}</h8>
+            <p>{{ $post->score }}</p>
+        </div>
+        <div>
+            <a href="/">Back</a>
+        </div>
     </body>
 </html>
