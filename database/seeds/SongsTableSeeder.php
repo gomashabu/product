@@ -26,7 +26,15 @@ class SongsTableSeeder extends Seeder
                 'artist_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'title' => 'Smells Like Teen Spirit',
+                'artist_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
+            
         ]);
     }
 }
