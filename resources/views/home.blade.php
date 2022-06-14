@@ -13,10 +13,11 @@
         <div class='search'>
             <p>search</p>
         </div>
-        <div class='new_song'>
+        <div class='NewSong'>
+            [<a href='/posts/create'>create</a>]
             @foreach ($posts as $post)
-                <div class='posts_new'>
-                    <p class='song'>{{ $post->song->title }}</p>
+                <div class='TopNewPost'>
+                    <a href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
                     <p class='artist'>- {{ $post->artist->name }}</p>
                     <h8 class='user'>{{ $post->user_id }}</h8>
                 </div>

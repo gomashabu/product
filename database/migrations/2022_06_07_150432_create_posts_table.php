@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->text('score');
             $table->integer('song_id')->unsigned();
-            $table->integer('user_id') ->unsigned();
+            // $table->integer('user_id') ->unsigned();
             $table->integer('artist_id')->unsigned();
             $table->timestamps();
             

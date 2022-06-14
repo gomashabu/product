@@ -23,10 +23,10 @@ class Post extends Model
         return $this::with('artist')->orderBy('updated_at', 'DESC')->limit($limit_count)->get(); 
     }
     
-     public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
+    //  public function user()
+    // {
+    //     return $this->belongsTo('App\User');
+    // }
     
     public function artist()
     {
