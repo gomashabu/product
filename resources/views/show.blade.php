@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     </head>
     <body>
-        [<a href='/posts/create'>create</a>]
+        <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit</a>]</p>
         <div class='post'>
             <p>{{ $post->song->title }}</p>
             <p class='artist'>- {{ $post->artist->name }}</p>
