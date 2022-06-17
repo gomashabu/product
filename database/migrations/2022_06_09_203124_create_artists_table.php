@@ -17,6 +17,7 @@ class CreateArtistsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 40);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
