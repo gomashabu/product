@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Song extends Model
 {
-     public $fillable = [
+    use SoftDeletes;
+    
+     
+    public $fillable = [
         'title',
         'artist_id'
         ];
@@ -42,5 +46,6 @@ class Song extends Model
             return $song_id[0];
         }
     }
+    
     
 }
