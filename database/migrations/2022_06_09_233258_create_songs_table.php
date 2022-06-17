@@ -18,6 +18,7 @@ class CreateSongsTable extends Migration
             $table->string('title', 50);
             $table->integer('artist_id') ->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
