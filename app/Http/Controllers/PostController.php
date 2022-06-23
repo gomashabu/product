@@ -11,7 +11,6 @@ use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\PostTraits;
-//use GuzzleHttp\Client;
 
 class PostController extends Controller
 {
@@ -81,45 +80,19 @@ class PostController extends Controller
     
     public function search(Post $post, Artist $artist, Song $song, Request $request)
     {
-        // ユーザー一覧をページネートで取得
-        // $users = User::paginate(20);
-        
         // 検索フォームで入力された値を取得する
-        $search = $request->input('search');
-
-        // クエリビルダ
-        $query = $song->get();
-
-       // もし検索フォームにキーワードが入力されたら
-        if ($search) {
-
-            // 全角スペースを半角に変換
-            $spaceConversion = mb_convert_kana($search, 's');
-
-            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
-            // \sは一文字以上の空白　[]はカッコ内の任意の一文字と一致するもの　＋は直前の表現を一文字以上繰り返す
-            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-
-            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
-            foreach($wordArraySearched as $value) {
-                $query->where('title', 'like', '%'.$value.'%');
-            }
-            
-        //上記で取得した$queryをページネートにし、変数$usersに代入    
-        $users = $query->paginate(20);
-        }
-
-        // ビューにusersとsearchを変数として渡す
+        $search = $request->input();
+        //検索結果の[song.id, artist_id]の配列
+        $searched_ids = $this->searchResultsWithSongAndArtist($search, $song, $artist);
+        
         return view('searchResults')
             ->with([
-                'users' => $users,
+                'posts' => $post->whereIn('song_id', $searched_ids['song'])->orWhere(function($query) use($searched_ids){
+                return $query->whereIn('artist_id', $searched_ids['artist']);
+                })->get(),
+                'songs' => $song->get(),
+                'artists' => $artist->get(),
                 'search' => $search,
             ]);
-            
-        // return view('searchResults')->with([
-        //     'posts' => $post->getNewByLimit(), 
-        //     'artists' => $artist->get(), 
-        //     'songs' => $song->get(), 
-        //     ]);
     }
 }

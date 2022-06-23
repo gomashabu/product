@@ -17,7 +17,8 @@
     <body>
         <div class='search'>
             <form action="/search" method="GET">
-                <input type="text" name="search" placeholder="Enter song name" value="@if (isset($search)) {{ $search }} @endif">
+                <input type="text" name="song" placeholder="Enter song name" value="@if (isset($song_keyword)) {{ $song_keyword }} @endif">
+                <input type="text" name="artist" placeholder="Enter artist name" value="@if (isset($artist_keyword)) {{ $artist_keyword }} @endif">
                 <input type="submit" value="検索">
             </form>
        </div>

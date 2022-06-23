@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\PostTraits;
 
 class Song extends Model
 {
@@ -46,6 +47,4 @@ class Song extends Model
             return $song_id[0];
         }
     }
-    
-    
 }
