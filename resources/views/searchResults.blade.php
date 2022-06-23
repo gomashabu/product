@@ -17,7 +17,8 @@
     <body>
         <div class='search'>
             <form action="/search" method="GET">
-                <input type="text" name="search" placeholder="Enter song name" value="@if (isset($search)) {{ $search }} @endif">
+                <input type="text" name="song" placeholder="Enter song name" value="@if (isset($search['song'])) {{ $search['song'] }} @endif">
+                <input type="text" name="artist" placeholder="Enter artist name" value="@if (isset($search['artist'])) {{ $search['artist'] }} @endif">
                 <input type="submit" value="検索">
             </form>
        </div>
@@ -28,7 +29,7 @@
             <h8>{{Auth::user()->name}}</h8>
         </div>
         @endif
-        <div class='NewSong'>
+        <div class='SongsSearched'>
             @foreach ($posts as $post)
                 <div class='TopNewPost'>
                     <a href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
