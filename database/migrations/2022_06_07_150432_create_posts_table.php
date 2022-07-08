@@ -16,6 +16,10 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('score');
+            // $table->integer('score_type');
+            // $table->text('lyrics');
+            // $table->text('chords');
+            // $table->text('flatscore');
             $table->integer('song_id')->unsigned();
             $table->integer('user_id') ->unsigned();
             $table->integer('artist_id')->unsigned();

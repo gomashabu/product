@@ -31,11 +31,6 @@ class Post extends Model
         return $this::with('artist')->where('user_id', $auths)->orderBy('updated_at', 'DESC')->limit($limit_count)->get(); 
     }
     
-    //  public function user()
-    // {
-    //     return $this->belongsTo('App\User');
-    // }
-    
     public function artist()
     {
         return $this->belongsTo('App\Artist');
@@ -49,6 +44,11 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+    
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
     }
     
     public function song_should_be_deleted($query)

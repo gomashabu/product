@@ -16,7 +16,7 @@ class Song extends Model
         'artist_id'
         ];
         
-    public function post()
+    public function posts()
     {
         return $this->hasMany('App\Post');
     }
