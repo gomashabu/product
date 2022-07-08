@@ -6,6 +6,7 @@ use App\Post;
 use App\User;
 use App\Artist;
 use App\Song;
+use App\Like;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\DB;
@@ -18,22 +19,28 @@ class PostController extends Controller
     
     public function top(Post $post, Artist $artist, Song $song)
     {
+        $like_count = Post::withCount('likes')->get();
         return view('top')->with([
             'posts' => $post->getNewByLimit(), 
             'artists' => $artist->get(), 
             'songs' => $song->get(), 
+            'like_count' => $like_count
             ]);
     }
     
     public function mysongs(Post $post, Artist $artist, Song $song)
     {
-        return view('mysongs')->with(['posts' => $post->getMySongByLimit(), 'artists' => $artist->get(), 'songs' => $song->get()]);
+        // $like=Like::where('post_id', $post->id)->where('user_id', $id)->first(); 
+        $like_count = Post::withCount('likes')->get();
+        return view('mysongs')->with(['posts' => $post->getMySongByLimit(), 'artists' => $artist->get(), 'songs' => $song->get(), 'like_count' => $like_count]);
     }
     
     public function show(Post $post, Artist $artist, Song $song)
     {
         $id = Auth::id();
-        return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id]);
+        $like=Like::where('post_id', $post->id)->where('user_id', $id)->first();
+        $like_count = Post::withCount('likes')->get();
+        return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count]);
     }
     
     public function create()
@@ -84,15 +91,31 @@ class PostController extends Controller
         $search = $request->input();
         //検索結果の[song.id, artist_id]の配列
         $searched_ids = $this->searchResultsWithSongAndArtist($search, $song, $artist);
+        $like_count = Post::withCount('likes')->get();
         
         return view('searchResults')
             ->with([
                 'posts' => $post->whereIn('song_id', $searched_ids['song'])->orWhere(function($query) use($searched_ids){
-                return $query->whereIn('artist_id', $searched_ids['artist']);
+                    return $query->whereIn('artist_id', $searched_ids['artist']);
                 })->get(),
                 'songs' => $song->get(),
                 'artists' => $artist->get(),
                 'search' => $search,
+                'like_count' => $like_count
             ]);
+    }
+    
+    public function like(Post $post, Request $request, Like $like){
+        $like->post_id=$post->id;
+        $like->user_id=Auth::user()->id;
+        $like->save();
+        return back();
+    }
+    
+    public function unlike(Post $post, Request $request, Like $like){
+        $user=Auth::user()->id;
+        $like=Like::where('post_id', $post->id)->where('user_id', $user)->first();
+        $like->delete();
+        return back();
     }
 }

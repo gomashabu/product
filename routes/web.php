@@ -17,9 +17,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/posts/mysongs', 'PostController@mysongs');
     Route::get('/posts/create', 'PostController@create');
     Route::get('/posts/{post}/edit', 'PostController@edit');
+    Route::get('/like/{post}', 'PostController@like')->name('like');
+    Route::get('/unlike/{post}', 'PostController@unlike')->name('unlike');
     Route::put('/posts/{post}', 'PostController@update');
     Route::post('/posts', 'PostController@store');
     Route::delete('/posts/{post}', 'PostController@delete');
+    
 });
 
 Auth::routes();
