@@ -12,10 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/bundle.js') }}"></script>
-    
- 
     @hassection('src')
-    <script src=@yield('src') defer></script>
+    <script src= "@yield('src')" defer></script>
     @endif
 
     <!-- Fonts -->

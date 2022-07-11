@@ -30,7 +30,13 @@ class ArtistsTableSeeder extends Seeder
                 'name' => 'ONE OK ROCK',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'id' => 4,
+                'name' => 'Alessandro Scarlatti',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
