@@ -28,10 +28,14 @@
             <div class='TopNewPost'>
                 <a href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
                 <p class='artist'>- {{ $post->artist->name }}</p>
+                <p class='scoretype'>scoretype : {{ $post->score_type }}</p>
                 <p class="badge">like{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }}</p>
                 <h8 class='user'>{{ $post->user->name }}</h8>
                 <br><br><br>
             </div>
         @endforeach
+    </div>
+    <div class='paginate'>
+        {{ $posts->links() }}
     </div>
 @endsection

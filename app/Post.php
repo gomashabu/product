@@ -12,23 +12,25 @@ class Post extends Model
     use SoftDeletes;
     
     public $fillable = [
-        'score',
+        'score_type',
+        'lyrics_with_chords',
+        'flat_score',
         'song_id',
         'artist_id',
         'user_id'
         ];
     
     
-    public function getNewByLimit(int $limit_count = 10)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this::with('artist')->orderBy('updated_at', 'DESC')->limit($limit_count)->get(); 
+        return $this::with('artist')->orderBy('updated_at', 'DESC')->paginate($limit_count); 
     }
     
     public function getMySongByLimit(int $limit_count = 10)
     {
         $auths = Auth::id();
-        return $this::with('artist')->where('user_id', $auths)->orderBy('updated_at', 'DESC')->limit($limit_count)->get(); 
+        return $this::with('artist')->where('user_id', $auths)->orderBy('updated_at', 'DESC')->paginate($limit_count); 
     }
     
     public function artist()
