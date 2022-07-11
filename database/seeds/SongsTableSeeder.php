@@ -33,7 +33,14 @@ class SongsTableSeeder extends Seeder
                 'artist_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'id' => 4,
+                'title' => 'Son tutta duolo',
+                'artist_id' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             
         ]);
     }

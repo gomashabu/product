@@ -21,7 +21,7 @@ class PostController extends Controller
     {
         $like_count = Post::withCount('likes')->get();
         return view('top')->with([
-            'posts' => $post->getNewByLimit(), 
+            'posts' => $post->getPaginateByLimit(), 
             'artists' => $artist->get(), 
             'songs' => $song->get(), 
             'like_count' => $like_count
@@ -35,12 +35,16 @@ class PostController extends Controller
         return view('mysongs')->with(['posts' => $post->getMySongByLimit(), 'artists' => $artist->get(), 'songs' => $song->get(), 'like_count' => $like_count]);
     }
     
-    public function show(Post $post, Artist $artist, Song $song)
+    public function showLyricsOrFlat(Post $post, Artist $artist, Song $song)
     {
         $id = Auth::id();
         $like=Like::where('post_id', $post->id)->where('user_id', $id)->first();
         $like_count = Post::withCount('likes')->get();
-        return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count]);
+        if($post->score_type == 'Lyrics with chords'){
+            return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count]);
+        }elseif($post->score_type == 'Flat score'){
+            return view('showFlat')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count]);
+        }
     }
     
     public function create()
@@ -57,10 +61,8 @@ class PostController extends Controller
         $input = $request->input();
         $user_id = Auth::id();
         $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
-       
         $this->storeOrUpdate($input, $IdInf, $post, $artist, $song, $user_id);
-        
-        return redirect('/posts/' . $post->id);
+            return redirect('/posts/' . $post->id);
     }
     
     public function edit(Post $post, Artist $artist, Song $song)

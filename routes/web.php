@@ -12,6 +12,8 @@
 */
 
 
+
+
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/mypage', 'PostController@mypage');
     Route::get('/posts/mysongs', 'PostController@mysongs');
@@ -27,7 +29,7 @@ Route::group(['middleware' => ['auth']], function(){
 
 Auth::routes();
 Route::get('/', 'PostController@top');
-Route::get('/posts/{post}', 'PostController@show');
+Route::get('/posts/{post}', 'PostController@showLyricsOrFlat');
 Route::get('/search', 'PostController@search');
 
 
