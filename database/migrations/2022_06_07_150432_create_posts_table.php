@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->integer('song_id')->unsigned();
             $table->integer('user_id') ->unsigned();
             $table->integer('artist_id')->unsigned();
+            $table->string('key')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

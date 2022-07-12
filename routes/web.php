@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/unlike/{post}', 'PostController@unlike')->name('unlike');
     Route::put('/posts/{post}', 'PostController@update');
     Route::post('/posts', 'PostController@store');
+    Route::post('/posts/{post}/comment', 'PostController@storeComment');
     Route::delete('/posts/{post}', 'PostController@delete');
     
 });

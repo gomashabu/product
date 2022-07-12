@@ -7,6 +7,8 @@ use App\User;
 use App\Artist;
 use App\Song;
 use App\Like;
+use App\Comment;
+use App\Claim;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\DB;
@@ -35,15 +37,15 @@ class PostController extends Controller
         return view('mysongs')->with(['posts' => $post->getMySongByLimit(), 'artists' => $artist->get(), 'songs' => $song->get(), 'like_count' => $like_count]);
     }
     
-    public function showLyricsOrFlat(Post $post, Artist $artist, Song $song)
+    public function showLyricsOrFlat(Post $post, Artist $artist, Song $song, Comment $comment, Claim $claim)
     {
         $id = Auth::id();
         $like=Like::where('post_id', $post->id)->where('user_id', $id)->first();
         $like_count = Post::withCount('likes')->get();
         if($post->score_type == 'Lyrics with chords'){
-            return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count]);
+            return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count, 'comments' => $comment->getPaginateByLimit(), 'claims' =>$claim->get()]);
         }elseif($post->score_type == 'Flat score'){
-            return view('showFlat')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count]);
+            return view('showFlat')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count, 'comments' => $comment->getPaginateByLimit()]);
         }
     }
     
@@ -62,7 +64,20 @@ class PostController extends Controller
         $user_id = Auth::id();
         $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
         $this->storeOrUpdate($input, $IdInf, $post, $artist, $song, $user_id);
-            return redirect('/posts/' . $post->id);
+        return redirect('/posts/' . $post->id);
+    }
+    
+    public function storeComment(
+        Request $request,
+        Post $post,
+        Comment $comment)
+    {  
+        $input = $request['comment'];
+        $user_id = Auth::id();
+        $comment->fill(['comment'=>$input,
+                        'post_id'=>$post->id,
+                        'user_id'=> $user_id])->save();
+        return redirect('/posts/' . $post->id);
     }
     
     public function edit(Post $post, Artist $artist, Song $song)
