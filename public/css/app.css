@@ -10953,3 +10953,9 @@ a.text-dark:focus {
   }
 }
 
+        .paragraph table:nth-child(3){
+            background-color: red;
+        }
+        .paragraph table:nth-child(3):hover{
+            background-color: gold;
+        }
