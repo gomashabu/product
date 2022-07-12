@@ -17,7 +17,8 @@ class Post extends Model
         'flat_score',
         'song_id',
         'artist_id',
-        'user_id'
+        'user_id',
+        'key',
         ];
     
     
@@ -51,6 +52,11 @@ class Post extends Model
     public function likes()
     {
         return $this->hasMany('App\Like');
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
     
     public function song_should_be_deleted($query)
