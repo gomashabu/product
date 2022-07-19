@@ -28,6 +28,12 @@ class Post extends Model
         return $this::with('artist')->orderBy('updated_at', 'DESC')->paginate($limit_count); 
     }
     
+    public function getPaginateTopByLimit(int $limit_count = 5)
+    {
+        // likesの個数で降順に並べたあと、limitで件数制限をかける
+        return $this::withCount('likes')->orderBy('likes_count', 'DESC')->paginate($limit_count); 
+    }
+    
     public function getMySongByLimit(int $limit_count = 10)
     {
         $auths = Auth::id();

@@ -1,0 +1,135 @@
+p{
+  margin: 0;
+}
+
+#deleteButton{
+  width: fit-content;
+  height: 29px;
+}
+
+.claim{
+  background-color: #ede9e9;
+}
+
+.claim:hover {
+  background-color: #f3eb5f;
+}
+
+.postTitle{
+  margin:  10px auto;
+  padding: 2ch 2ch 3ch 2ch;
+  border: solid #705144 0.5px;
+  width: 765px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
+
+.postTitle *{
+  display: inline-block;
+}
+
+#byBetTitle{
+  margin:0 1ch;
+}
+
+.post{
+  width: 765px;
+  margin: 0 auto 0 auto;
+}
+
+.aboveScore{
+  display:flex;
+  justify-content:space-evenly;
+  margin: 20px auto;
+}
+
+.changeCharSize{
+  padding: 0ch 2ch;
+  border: solid #705144 0.5px;
+  width: 210px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
+
+.sizeButtonWithText{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sizeButtonWithText p{
+  font-size: 1rem;
+}
+
+.chordSizeButton *,
+.lyricsSizeButton *{
+  display: inline-block;
+  width: 34px;
+  height: 19px;
+}
+
+.forPoster{
+  padding: 0ch 2ch;
+  border: solid #705144 0.5px;
+  width: 210px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+  text-align: center;
+}
+
+.forPoster p{
+margin: 1ch;
+}
+
+.changeScore{
+  padding: 2ch 2ch;
+  border: solid #705144 0.5px;
+  width: 276px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+  display: flex;
+  justify-content:space-around;
+
+}
+
+select{
+  width: 15ch;
+}
+
+#divSelect select{
+  text-align: center;
+}
+#showChordsWithLyrics{
+  margin:  0 auto;
+  padding: 2ch 8ch 20ch 8ch;
+  border: solid #705144 0.5px;
+  width: 765px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
+
+.chord{
+  color:　#2D0F0F;
+  width: fit-content;
+}
+
+tbody{
+  margin-bottom: 1.5ch;
+}
+
+.row{
+  padding: 0 10px;
+}
+
+.claimButton{
+  margin-left: -15px;
+}
+
+.footer{
+  margin-top: 20px;
+  margin-left: 0;
+  padding: 10px 32px;
+  border: solid #705144 0.5px;
+  width: 100px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}

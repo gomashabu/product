@@ -1,41 +1,71 @@
 <!DOCTYPE html>
-@extends('layouts.app')　　　　　　　　　　　　　　　　　　
+@extends('layouts.app')　
 
+@section('css')
+    {{ asset('css/top.css') }}
+@endsection
 @section('content')
+    @if (Auth::check())
+        <div class="forLoggedIn">
+            <div class="right">
+                <p class="create">[<a href='/posts/create'>create</a>]</p>
+                <p class="mysongs">[<a href='/posts/mysongs'>my songs</a>]</p>
+            </div>
+        </div>
+    @else
+        <div class="spaceForNaavBar" style="margin-bottom: 80px;"></div>
+    @endif
     <div class='search'>
-        <form action="/search" method="GET">
-            <h3>song title</h3>
-            <input type="text" name="song" placeholder="Enter song name" value="@if (isset($song_keyword)) {{ $song_keyword }} @endif">
+        <form action="/search" method="GET" class = "SearchForm">
+            <div class = "song">
+                <h3 class = "title" style="margin-right: 5px;">Song title</h3>
+                <input type="text" class = "searchBox" name="song" placeholder="Enter song name" value="@if (isset($song_keyword)) {{ $song_keyword }} @endif">
+            </div>
             <br>
-            <h3>artist name</h3>
-            <input type="text" name="artist" placeholder="Enter artist name" value="@if (isset($artist_keyword)) {{ $artist_keyword }} @endif">
-            <br>
-            <input type="submit" value="検索">
+            <div class = "artist">
+                <h3 class = "title">Artist name</h3>
+                <input type="text" class = "searchBox" name="artist" placeholder="Enter artist name" value="@if (isset($artist_keyword)) {{ $artist_keyword }} @endif">
+            </div>
+            <input id="searchButton" type="submit" value="検索">
         </form>
    </div>
    <br><br>
-    @if (Auth::check())
-        <div class="AuthOnly">
-            <p class="create">[<a href='/posts/create'>create</a>]</p>
-            <p class="mysongs">[<a href='/posts/mysongs'>my songs</a>]</p>
-            <h8>{{Auth::user()->name}}</h8>
-        </div>
-    @endif
+    
     <br><br>
-    <div class='NewSong'>
-        <h3>New songs</h3>
-        @foreach ($posts as $post)
-            <div class='TopNewPost'>
-                <a href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                <p class='artist'>- {{ $post->artist->name }}</p>
-                <p class='scoretype'>scoretype : {{ $post->score_type }}</p>
-                <p class="badge">like{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }}</p>
-                <h8 class='user'>{{ $post->user->name }}</h8>
-                <br><br><br>
-            </div>
-        @endforeach
+    <div class="rankings">
+        <div class = "ranking">
+            <h3 class="rankTitle">Top songs</h3>
+            @foreach ($TopPosts as $post_key => $post)
+                <div class='TopPosts'>
+                    <p class="songInf">{{$TopPosts->firstItem()+$post_key}}.</p>
+                    <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
+                    <p class="songInf">- {{ $post->artist->name }}</p>
+                    <br>
+                    <p class="songInf space">scoretype : {{ $post->score_type }}</p>
+                    <br>
+                    <p class="songInf space">{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }} like(s)</p>
+                    <br><br>
+                </div>
+            @endforeach
+        </div>
+        <div class = "ranking">
+            <h3 class="rankTitle">New songs</h3>
+            @foreach ($NewPosts as $post_key => $post)
+                <div class='TopNewPosts'>
+                    <p class="songInf">{{$NewPosts->firstItem()+$post_key}}.</p>
+                    <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
+                    <p class="songInf">- {{ $post->artist->name }}</p>
+                    <br>
+                    <p class="songInf space">scoretype : {{ $post->score_type }}</p>
+                    <br>
+                    <p class="songInf space">{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }} like(s)</p>
+                    <br><br>
+                </div>
+            @endforeach
+        </div>
     </div>
-    <div class='paginate'>
+
+{{-- <div class='paginate'>
         {{ $posts->links() }}
-    </div>
+    </div> --}}
 @endsection

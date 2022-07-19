@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ClaimsTableSeeder extends Seeder
+class LikesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,20 +11,16 @@ class ClaimsTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('claims')->insert([
+        \DB::table('likes')->insert([
             [
                 'id' => 1,
-                'claim' => "AmではなくAm7では？",
-                'row_number' => '2',
                 'post_id' => 1,
-                'user_id' => 2,
+                'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'id' => 2,
-                'claim' => "歌詞が間違ってる",
-                'row_number' => '1',
                 'post_id' => 1,
                 'user_id' => 2,
                 'created_at' => now(),
@@ -32,14 +28,11 @@ class ClaimsTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'claim' => "コードの切り替わるタイミングが違う",
-                'row_number' => '2',
-                'post_id' => 1,
-                'user_id' => 1,
+                'post_id' => 2,
+                'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            
         ]);
     }
 }

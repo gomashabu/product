@@ -1,43 +1,64 @@
 @extends('layouts.app')　　　　　　　　　　　　　　　　　　
 
+@section('css')
+    {{ asset('css/edit.css') }}
+@endsection
+
 @section('content')
+    <div class="spaceForNaavBar" style="margin-bottom: 80px;"></div>
     <h1 class="title">Edit your score</h1>
-    <form action="/posts/{{ $post->id }}" method="POST">
+    <form action="/posts/{{ $post->id }}" method="POST" class="form">
         @csrf
         @method('PUT')
-        <div class='song_imformation'>
-            <h3>Song title</h3>
-            <input type="text" name="song" value="{{ $post->song->title }}"/>
-            <p class="song_imformation__error" style="color:red">{{ $errors->first('song') }}</p>
-            <h3>Artist name</h3>
-            <input type="text" name="artist" placeholder="artist name" value="{{ $post->artist->name }}"/>
-            <p class="song_imformation__error" style="color:red">{{ $errors->first('artist') }}</p>
-        </div>
-        <div class="score_type">
-            <div class="form-check form-check-inline">
-                <input type="radio" name="score_type" class="form-check-input" id="release1" value="Lyrics with chords"{{ old ('score_type') == 'Lyrics with chords' ? 'checked' : '' }} onclick="formSwitch()" checked>
-                <label for="release1" class="postcheck-label">lyrics with chords</label>
+        <div class="boforeScore">
+            <div class='song_imformation'>
+                <div class="text">
+                   <h4>Song title</h4>
+                   <h4>Artist name</h4>
+                </div>
+                <div class="inputText">
+                    <input type="text" name="song" value="{{ $post->song->title }}"/>
+                    <p class="song_imformation__error" style="color:red">{{ $errors->first('song') }}</p>
+                    <input type="text" name="artist" placeholder="artist name" value="{{ $post->artist->name }}"/>
+                    <p class="song_imformation__error" style="color:red">{{ $errors->first('artist') }}</p>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input type="radio" name="score_type" class="form-check-input" id="release2" value="Flat score"{{ old ('score_type') == 'Flat score' ? 'checked' : '' }}　onclick="formSwitch()">
-                <label for="release2" class="postcheck-label">flat score</label>
+            <div class="score_type">
+                <h4>Score type</h4>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="score_type" class="form-check-input" id="release1" value="Lyrics with chords"{{ old ('score_type') == 'Lyrics with chords' ? 'checked' : '' }} onclick="formSwitch()" checked>
+                    <label for="release1" class="postcheck-label">lyrics with chords</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="score_type" class="form-check-input" id="release2" value="Flat score"{{ old ('score_type') == 'Flat score' ? 'checked' : '' }} onclick="formSwitch()">
+                    <label for="release2" class="postcheck-label">flat score</label>
+                </div>
             </div>
-            </label>
         </div>
-        <div class='score'>
-            <div class = 'lyricsWithChord'>
-                <h3 id='LyricsInputTitle' >Lyrics with chord</h3>
-                <textarea class='textarea'  id='lyricsInput' name="lyrics_with_chords" >{{ $post->lyrics_with_chords }}</textarea>
+        <div class="scores">
+            <div class='score'>
+                <div class = 'lyricsWithChord'>
+                    <div class="scoreTop">
+                        <h3 id='LyricsInputTitle' >Lyrics with chord</h3>
+                        <h5>key: </h5>
+                        <input type="text" name="key" placeholder="曲のkey" value="{{ $post->key }}" style="display:block">
+                    </div>
+                    <textarea class='textarea'  id='lyricsInput' name="lyrics_with_chords" rows="30" cols="80">{{ $post->lyrics_with_chords }}</textarea>
+                    <p class="score__error" style="color:red">{{ $errors->first('lyrics_with_chords') }}</p>
+                </div>
+            </div>
+            <div class='FlatScore'>
+                <div style="margin-top: 25px; padding-bottom: 10px; height: 80px;">
+                    <h3>FlatScore</h3>
+                </div>
+                <textarea class='textarea' name="flat_score" rows="20" cols="80">{{ $post->flat_score }}</textarea>
                 <p class="score__error" style="color:red">{{ $errors->first('lyrics_with_chords') }}</p>
             </div>
+            <input class="submitButton" type="submit" value="保存" />
         </div>
-        <div class='FlatScore'>
-            <h3>FlatScore</h3>
-            <textarea class='textarea' name="flat_score">{{ $post->flat_score }}}</textarea>
-            <p class="score__error" style="color:red">{{ $errors->first('lyrics_with_chords') }}</p>
-        </div>
-        <input type="submit" value="保存" />
     </form>
-    <div class="back">[<a href="/">back</a>]</div>
+    <div class="footer">
+        <div class="back">[<a href="/">back</a>]</div>
+    </div>
 <script src="{{ asset('js/formswitch.js') }}" defer></script>
 @endsection

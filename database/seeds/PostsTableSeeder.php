@@ -42,12 +42,36 @@ class PostsTableSeeder extends Seeder
             [
                 'id' => 3,
                 'score_type' => "Lyrics with chords",
-                'lyrics_with_chords' => "load up on guns and",
+                'lyrics_with_chords' => "[Em][B/D#]
+[Em]O  ces[B/D#]sate  [C/E]di  pia[F#dim7]garmi,
+[C/G]o  la[B7/F#]scia[Em]te[Baug]mi  [B7]mo[C]rir.[Bdim7]
+[Adim7]o  [Em/G]la[B7/F#]scia[Em]te[Baug]mi  [B7]mo[Em]rir.
+[F#7/A#]Luci  in[B]grate  [F#7/C#]dispie[Bm/D]tate
+[G7/B]Luci  in[C]grate  [G/F]dispie[C/E]tate
+[A7/C#]più  del  [D]gelo,  [Em6]più  dei  [D/F#]marmi
+[G]fre[F/A]dde  e  [G/B]sor[C6]de  ai  [Bm/D]miei  [D7]mar[Em]tir.
+[G7/D]fre[C]dde  e  [G/B]sorde  ai  [Bm/D]miei  mar[G]tir. [B7]
+[Em]O  ces[B/D#]sate  [C/E]di  pia[F#dim7]garmi,
+[C/G]o  la[B7/F#]scia[Em]te[Baug]mi  [B7]mo[C]rir.[Bdim7]
+[Adim7]o  [Em/G]la[B7/F#]scia[Edim7]te[Baug]mi  [B7]mo[Em]rir.
+
+[Em]O  ces[B/D#]sate  [C/E]di  pia[F#dim7]garmi,
+[C/G]o  la[B7/F#]scia[Em]te[Baug]mi  [B7]mo[C]rir.[Bdim7]
+[Adim7]o  [Em/G]la[B7/F#]scia[Em]te[Baug]mi  [B7]mo[Em]rir.
+[F#7/A#]Luci  in[B]grate  [F#7/C#]dispie[Bm/D]tate
+[G7/B]Luci  in[C]grate  [G/F]dispie[C/E]tate
+[A7/C#]più  del  [D]gelo,  [Em6]più  dei  [D/F#]marmi
+[G]fre[F/A]dde  e  [G/B]sor[C6]de  ai  [Bm/D]miei  [D7]mar[Em]tir.
+[G7/D]fre[C]dde  e  [G/B]sorde  ai  [Bm/D]miei  mar[G]tir. [B7]
+[Em]O  ces[B/D#]sate  [C/E]di  pia[F#dim7]garmi,
+[C/G]o  la[B7/F#]scia[Em]te[Baug]mi  [B7]mo[C]rir.[Bdim7]
+[Adim7]o  [Em/G]la[B7/F#]scia[Edim7]te[Baug]mi  [B7]mo[Em]rir.
+",
                 'flat_score' => '',
                 'song_id' => 2,
                 'artist_id' => 2,
                 'user_id' => 2,
-                'key' => null,
+                'key' => "Em",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
