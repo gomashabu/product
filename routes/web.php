@@ -16,7 +16,7 @@
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/mypage', 'PostController@mypage');
-    Route::get('/posts/mysongs', 'PostController@mysongs');
+    Route::get('/posts/mysongs', 'PostController@myPage');
     Route::get('/posts/create', 'PostController@create');
     Route::get('/posts/{post}/edit', 'PostController@edit');
     Route::get('/like/{post}', 'PostController@like')->name('like');

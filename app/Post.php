@@ -40,6 +40,24 @@ class Post extends Model
         return $this::with('artist')->where('user_id', $auths)->orderBy('updated_at', 'DESC')->paginate($limit_count); 
     }
     
+    public function getLikedSongByLimit(int $limit_count = 5)
+    {
+        $auths = Auth::id();
+        $posts = $this::with('likes')->whereHas('likes', function ($query) use($auths){
+            return $query->where('user_id', $auths);
+        })->orderBy('updated_at', 'DESC')->paginate($limit_count); 
+        return $posts; 
+    }
+    
+    public function getCommentedSongByLimit(int $limit_count = 5)
+    {
+        $auths = Auth::id();
+        $posts = $this::with('comments')->whereHas('comments', function ($query) use($auths){
+            return $query->where('user_id', $auths);
+        })->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $posts; 
+    }
+    
     public function artist()
     {
         return $this->belongsTo('App\Artist');

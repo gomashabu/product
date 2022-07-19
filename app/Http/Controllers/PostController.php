@@ -31,11 +31,17 @@ class PostController extends Controller
             ]);
     }
     
-    public function mysongs(Post $post, Artist $artist, Song $song)
+    public function myPage(Post $post, Artist $artist, Song $song)
     {
         // $like=Like::where('post_id', $post->id)->where('user_id', $id)->first(); 
         $like_count = Post::withCount('likes')->get();
-        return view('mysongs')->with(['posts' => $post->getMySongByLimit(), 'artists' => $artist->get(), 'songs' => $song->get(), 'like_count' => $like_count]);
+        return view('myPage')->with([
+            'posts' => $post->getMySongByLimit(),
+            'likedPosts' =>$post->getLikedSongByLimit(),
+            'commentedPosts' =>$post->getCommentedSongByLimit(),
+            'artists' => $artist->get(), 
+            'songs' => $song->get(), 
+            'like_count' => $like_count]);
     }
     
     public function showLyricsOrFlat(Post $post, Artist $artist, Song $song, Comment $comment, Claim $claim)

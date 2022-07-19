@@ -1,0 +1,127 @@
+.forLoggedIn{
+    position: relative;
+    width: 765px;
+    margin: 15px auto 10px auto;
+    height: 65px;
+}
+
+.right{
+   position: absolute;
+   top: 0;
+   right: 0;
+   border: solid #705144 0.5px;
+   box-shadow: 1px 2.5px 5px #BC9176;
+   background-color: #FFF7F2;
+}
+
+.right p{
+    margin:0.3rem 0.3rem ;
+}
+
+.search{
+    margin:  0 auto;
+    padding: 2ch 2ch;
+    border: solid #705144 0.5px;
+    width: 765px;
+    background-color: #FFF7F2;
+    box-shadow: 1px 2.5px 5px #BC9176;
+}
+
+.searchBox {
+    min-width: 220px;
+    height: 35px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #705144;
+    margin-left: 5px;
+}
+
+
+.searchBox:focus {
+    outline: none;
+}
+
+.SearchForm{
+    text-align: center;
+}
+
+#searchButton{
+    margin-top: 20px;
+}
+
+
+.rankings{
+    margin: 20px auto;
+    padding: 2ch 1ch;
+    width: 765px;
+    display: flex;
+    background-color: #FFF7F2;
+    box-shadow: 1px 2.5px 5px #BC9176;
+    justify-content:space-evenly;    
+}
+
+.ranking{
+    padding: 0 10px;
+    border: solid #ccd4f0;
+    background-color: white;
+    margin: 0ch 1ch;
+}
+
+.rankTitle{
+    background-color: #e8f1fa;
+    margin:0 -10px;
+    padding: 10px 10px;
+}
+
+.songInf{
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.space{
+    margin-left: 2ch;
+}
+
+.postInfo{
+    margin-bottom: 0; 
+    margin-left: 4ch;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+.song, 
+.artist {
+    display: flex;
+    justify-content:space-between;
+    width: 350px;
+    margin: 5px auto;
+}
+
+.song h3 {
+    white-space: nowrap;
+}
+
+.song .searchBox {
+   margin-left: 22px;
+}
+
+.artist h3 {
+    white-space: nowrap;
+}
+
+.outOfFooter{
+    width: 765px;
+    margin:0 auto;
+}
+
+.footer{
+  margin-top: 20px;
+  margin-left: 0;
+  padding: 10px 32px;
+  border: solid #705144 0.5px;
+  width: 100px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
