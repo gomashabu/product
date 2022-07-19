@@ -34,7 +34,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", sans-serif;
+  --font-family-sans-serif: Georgia, serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -45,7 +45,7 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: Georgia, sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -53,7 +53,7 @@ html {
 
 article,
 aside,
-figcaption,
+figcaption
 figure,
 footer,
 header,
@@ -66,13 +66,20 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  padding: 0;
+  font-family: Georgia, sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-image: url(https://cdn.pixabay.com/photo/2015/03/02/21/23/music-656593_1280.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color:rgba(255,255,255,0.7);
+  background-blend-mode:lighten;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -99,6 +106,8 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
+
 
 abbr[title],
 abbr[data-original-title] {
@@ -10952,10 +10961,3 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
-
-        .paragraph table:nth-child(3){
-            background-color: red;
-        }
-        .paragraph table:nth-child(3):hover{
-            background-color: gold;
-        }

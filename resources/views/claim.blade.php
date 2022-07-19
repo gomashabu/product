@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    {{ asset('css/show.css') }}
+    {{ asset('css/claim.css') }}
 @endsection
 
 @section('content')
@@ -23,6 +23,7 @@
                                     <br>
                                 </div>
                                 @endforeach
+                            
                         </label>
                     </div>
                     <div class="modal-footer">
@@ -49,8 +50,8 @@
                                 <option value='symbol'>Chord Symbols (e.g. C#m, G7)</option>
                                 <option value='numeral'>Numeral Chords (e.g. Im, V7)</option>
                             </select>
-                        </div>
-                    @endif
+                            </div>
+                        @endif
                     <div id='divSelect'>
                     </div>
                 </div>
@@ -93,58 +94,13 @@
             <h6 class="float-right">posted by {{ $post->user->name }}</h6>
         </div>
         <p id = "showChordsWithLyrics"></p>
-    </div>
-    <div class="footer">
-        <div>
-            <a href="/">Back</a>
+        <div class="footer">
+            <a href="/posts/{{ $post->id }}">Back</a>
         </div>
-        @if (Auth::check())
-            <div>
-                <a href="/posts/{{ $post->id }}/claim">指摘をする</a>
-            </div>
-        @endif
-        <span>
-            <!--画像埋め込み
-            <img src="{{asset('img/nicebutton.png')}}" width="30px"> -->
-             
-            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
-            @if($like)
-            <!-- 「いいね」取消用ボタンを表示 -->
-            	<a href="{{ route('unlike', $post) }}" class="btn btn-success btn-sm">
-            		like
-            		<!-- 「いいね」の数を表示 -->
-            		<span class="badge">
-            			{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }}
-            	    </span>
-            	</a>
-            @else
-            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-            	<a href="{{ route('like', $post) }}" class="btn btn-secondary btn-sm">
-            		like
-            		<!-- 「いいね」の数を表示 -->
-            	    <span class="badge">
-                			{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }}
-                	</span>
-            	</a>
-            @endif
-        </span>
     </div>
-    <div class='comments'>
-        <h3>Comments</h3>
-        @if (Auth::check())
-            <form action="/posts/{{ $post->id }}/comment" method="POST">
-                @csrf
-                <textarea class='textarea'  id='CommentInput' name="comment" placeholder="Enter your comment" rows="5" cols="50" >{{ old('comment') }}</textarea>
-                <input type="submit" value="保存" />
-            </form>
-        @endif
-        @foreach ($comments as $comment)
-            <div class='commentList'>
-                <p class='comment'>{{ $comment->comment }}</p>
-                <p class='user'>- {{ $comment->user->name }}</p>
-            </div>
-        @endforeach
-    </div>
+    <form  method="POST" id="form">
+        @csrf
+    </form>
     <script defer>
         const postScore = `<?php echo $post->lyrics_with_chords; ?>`;
         var key = "{{ $post->key }}";
@@ -246,8 +202,82 @@
             return changedChord;
         }
         
+        function createTextarea(i, createOrEdit){
+            if(document.getElementById("rowNumberP")){
+                deleteForm();
+            }
+            const form = document.getElementById("form");
+            const rows = document.querySelectorAll('.row');
+            rows[i].parentNode.insertBefore(form, rows[i].nextSibling);
+            
+            /* 何行目のclaimかをpタグで表示 */
+            const rowNumberP= document.createElement('p');
+                rowNumberP.id = "rowNumberP";
+                rowNumberP.innerText = i + "行目への指摘";
+            form.appendChild(rowNumberP);
+            /* row_numberを自動で入力しておくinput */
+            const rowNumberInput = document.createElement('input');
+                rowNumberInput.value = i;
+                rowNumberInput.name = "row_number"
+                rowNumberInput.type="hidden"
+            form.appendChild(rowNumberInput);
+            /* claim入力用のテキストエリアを作成 */
+            const textarea = document.createElement('textarea');
+                textarea.name = "claim";
+                textarea.placeholder = "Enter your opinion";
+                textarea.rows = "3";
+                textarea.cols = "40";
+            form.appendChild(textarea);
+            /* キャンセルボタン生成 */
+            const cancelButton = document.createElement('button');
+                cancelButton.id = "cancelButton" + i;
+                cancelButton.innerText = "キャンセル";
+                cancelButton.type = 'button';
+                cancelButton.setAttribute('onclick', "deleteForm(" + i + ")");
+            form.appendChild(cancelButton);
+            /* submitボタン生成 */
+            const submitButton = document.createElement('input');
+                submitButton.type = "submit";
+                submitButton.value = "保存";
+                submitButton.setAttribute('class', "テスト");
+            form.appendChild(submitButton);
+            if(createOrEdit == "edit"){
+                textarea.innerText = @json($claimOfThisUser)[i];
+                /* claimのidを取得してコントローラに送る */
+                var claimsByRow = @json($claimsByRows)[i];
+                var claim = Object.keys(claimsByRow).filter(function(claimByRow){
+                    return claimsByRow[claimByRow].user_id == "{{ $id }}";
+                });
+                var claimId = claimsByRow[claim]["id"];
+                form.action = "/claim/{{ $post->id }}/" + claimId + "/edit"
+                /* putメソッドにするためのinputタグ生成 */
+                const method = document.createElement('input');
+                    method.id = "method"
+                    method.type = "hidden"
+                    method.name = "_method"
+                    method.value = "PUT";
+                form.prepend(method);
+            }else if(createOrEdit == "create"){
+                textarea.innerText = "{{ old('claim') }}"
+                form.action = "/claim/{{ $post->id }}"
+            }
+        }
+        
+        function deleteForm(){
+            const method = document.getElementById("method");
+            if(method){
+                method.remove();
+            }
+            const form = document.getElementById("form");
+            /* form.lengthはformコントロールしか数えないので、pタグなどはカウントされない */
+            for(let i=form.length; i>=0; i--){
+                if(form.children[i].name !== "_token"){
+                    form.removeChild(form.children[i]);
+                }
+            }
+        }
+        
         function displayScore(degree, ifTranspose){
-            console.log(degree);
             const chordSheet = `
             `.substring(1) + changeSong(degree, ifTranspose);
             const parser = new ChordSheetJS.ChordProParser();
@@ -264,6 +294,27 @@
                 rows[claimRow].setAttribute('data-target', "#claimModal" + claimRow);
                 rows[claimRow].classList.add('claim')
             });
+            for(let i=1; i<rows.length; i++){
+                if(@json($claimOfThisUser)[i]){
+                    /*　注釈編集をする行を指定するボタン作成 */
+                    claimButton(i,"への指摘を編集", "edit");
+                }else{
+                    /*　注釈入力をする行を指定するボタン作成 */
+                    claimButton(i,"に指摘をする", "create");
+                }
+            }    
+        }
+        
+        /*　注釈入力をする行を指定するボタン作成 */
+        function claimButton(i, text, createOrEdit){
+            const rows = document.querySelectorAll('.row');
+            var claimButton = document.createElement('button');
+                claimButton.id = "claimButton" + i;
+                claimButton.innerText = i + "行目" + text;
+                claimButton.type = 'button';
+                claimButton.setAttribute('class', "claimButton");
+                claimButton.setAttribute('onclick', "createTextarea(" + i + ", '" + createOrEdit + "')");
+            rows[i].parentElement.insertBefore(claimButton, rows[i]);
         }
         
         function changeSize(char, upOrDown){

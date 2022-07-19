@@ -23,7 +23,8 @@ class PostController extends Controller
     {
         $like_count = Post::withCount('likes')->get();
         return view('top')->with([
-            'posts' => $post->getPaginateByLimit(), 
+            'NewPosts' => $post->getPaginateByLimit(),
+            'TopPosts' => $post->getPaginateTopByLimit(),
             'artists' => $artist->get(), 
             'songs' => $song->get(), 
             'like_count' => $like_count
@@ -43,28 +44,48 @@ class PostController extends Controller
         $like=Like::where('post_id', $post->id)->where('user_id', $id)->first();
         $like_count = Post::withCount('likes')->get();
         if($post->score_type == 'Lyrics with chords'){
-            return view('show')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count, 'comments' => $comment->getPaginateByLimit(), 'claims' =>$claim->get()]);
+            
+            return view('show')->with([
+                    'post' => $post, 
+                    'artist' => $artist, 
+                    'song' => $song, 
+                    'id' => $id, 
+                    'like' => $like, 
+                    'like_count' => $like_count, 
+                    'comments' => $comment->getPaginateByLimit($post->id), 
+                    'claimsByRows'=> $claim->getClaimsByRows($post->id),
+                    'claimRows' =>$claim->getClaimsRows($post->id),
+            ]);
         }elseif($post->score_type == 'Flat score'){
-            return view('showFlat')->with(['post' => $post, 'artist' => $artist, 'song' => $song, 'id' => $id, 'like' => $like, 'like_count' => $like_count, 'comments' => $comment->getPaginateByLimit()]);
+            return view('showFlat')->with([
+                    'post' => $post, 
+                    'artist' => $artist, 
+                    'song' => $song, 
+                    'id' => $id, 
+                    'like' => $like,
+                    'like_count' => $like_count, 
+                    'comments' => $comment->getPaginateByLimit($post->id)
+            ]);
         }
     }
     
+    public function claim(Post $post, Artist $artist, Song $song, Claim $claim)
+    {
+        $id = Auth::id();
+        return view('claim')->with([
+                    'post' => $post, 
+                    'artist' => $artist, 
+                    'song' => $song, 
+                    'id' => $id, 
+                    'claimsByRows'=> $claim->getClaimsByRows($post->id),
+                    'claimRows' =>$claim->getClaimsRows($post->id),
+                    'claimOfThisUser' =>$claim->getClaimOfThisUser($post->id, $id),
+            ]);
+    }
+
     public function create()
     {
         return view('create');
-    }
-    
-    public function store(
-        PostRequest $request,
-        Post $post,
-        Song $song,
-        Artist $artist)
-    {  
-        $input = $request->input();
-        $user_id = Auth::id();
-        $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
-        $this->storeOrUpdate($input, $IdInf, $post, $artist, $song, $user_id);
-        return redirect('/posts/' . $post->id);
     }
     
     public function storeComment(
@@ -80,9 +101,50 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
     
+    public function storeClaim(
+        Request $request,
+        Post $post,
+        Claim $claim)
+    {  
+        $input = $request->input();
+        $user_id = Auth::id();
+        $claim->fill(['claim'=>$input['claim'],
+                      'row_number'=>$input['row_number'],
+                      'post_id'=>$post->id,
+                      'user_id'=> $user_id])->save();
+        return redirect('/posts/'. $post->id .'/claim');
+    }
+    
+    public function updateClaim(
+        Request $request,
+        Post $post,
+        Claim $claim)
+    {    
+        $input = $request->input();
+        $user_id = Auth::id();
+        $claim->fill(['claim'=>$input['claim'],
+                      'row_number'=>$input['row_number'],
+                      'post_id'=>$post->id,
+                      'user_id'=> $user_id])->save();
+        return redirect('/posts/'. $post->id .'/claim');
+    }
+    
     public function edit(Post $post, Artist $artist, Song $song)
     {
         return view('edit')->with(['post' => $post, 'artist' => $artist, 'song' => $song]);
+    }
+    
+    public function store(
+        PostRequest $request,
+        Post $post,
+        Song $song,
+        Artist $artist)
+    {  
+        $input = $request->input();
+        $user_id = Auth::id();
+        $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
+        $this->storeOrUpdate($input, $IdInf, $post, $artist, $song, $user_id);
+        return redirect('/posts/' . $post->id);
     }
     
     public function update(PostRequest $request, Post $post, Artist $artist, Song $song)
@@ -90,9 +152,7 @@ class PostController extends Controller
         $input = $request->input();
         $user_id = Auth::id();
         $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
-       
         $this->storeOrUpdate($input, $IdInf, $post, $artist, $song, $user_id);
-       
         return redirect('/posts/' . $post->id);
     }
     
