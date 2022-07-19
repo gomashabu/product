@@ -163,9 +163,7 @@ class PostController extends Controller
         
         return view('searchResults')
             ->with([
-                'posts' => $post->whereIn('song_id', $searched_ids['song'])->orWhere(function($query) use($searched_ids){
-                    return $query->whereIn('artist_id', $searched_ids['artist']);
-                })->paginate($limit_count),
+                'posts' => $post->search($searched_ids),
                 'songs' => $song->get(),
                 'artists' => $artist->get(),
                 'search' => $search,
