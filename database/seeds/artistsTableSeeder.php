@@ -14,19 +14,16 @@ class ArtistsTableSeeder extends Seeder
     {
         \DB::table('artists')->insert([
             [
-                'id' => 1,
                 'name' => 'Franz Schubert',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'id' => 2,
                 'name' => 'Alessandro Scarlatti',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id' => 3,
                 'name' => 'Heinrich Werner',
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -15,7 +15,6 @@ class PostsTableSeeder extends Seeder
         //
         \DB::table('posts')->insert([
             [
-                'id' => 1,
                 'score_type' => "Lyrics with chords",
                 'lyrics_with_chords' =>  "Sah ein Knab' ein Röslein stehn,
 Röslein auf der Heiden,
@@ -47,7 +46,6 @@ Röslein auf der Heiden.",
                 'updated_at' => now(),
             ],
             [
-                'id' => 2,
                 'score_type' => "Lyrics with chords",
                 'lyrics_with_chords' => "load[Am] up on guns",
                 'flat_score' => '',
@@ -59,7 +57,6 @@ Röslein auf der Heiden.",
                 'updated_at' => now(),
             ],
             [
-                'id' => 3,
                 'score_type' => "Lyrics with chords",
                 'lyrics_with_chords' => "[Em][B/D#]
 [Em]O  ces[B/D#]sate  [C/E]di  pia[F#dim7]garmi,
@@ -95,7 +92,6 @@ Röslein auf der Heiden.",
                 'updated_at' => now(),
             ],
             [
-                'id' => 4,
                 'score_type' => "Lyrics with chords",
                 'lyrics_with_chords' => "Sah ein Knab' ein Röslein stehn,
 Röslein auf der Heiden,
@@ -127,7 +123,6 @@ Röslein auf der Heiden.",
                 'updated_at' => now(),
             ],
             [
-                'id' => 5,
                 'score_type' => "Flat score",
                 'lyrics_with_chords' => "",
                 'flat_score' => '<iframe src="https://flat.io/embed/62ad7723aa96a10013152fe7?_l=true&sharingKey=ed9970f42ffd7c64e2c85809e001408b3b30f2efba2fedbbb492ed6fe02e6fbcb33c4cddc816e87165f8184d838a89027d850e22ab852f0a8ef33e699065723b" height="450" width="750" frameBorder="0" allowfullscreen></iframe>

@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
         //
         \DB::table('users')->insert([
             [
-                'id' => 1,
                 'name' => 'asdf',
                 'email' => 'asdf@gmail.com',
                 'email_verified_at' => now(),
@@ -24,7 +23,6 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 2,
                 'name' => 'zxcv',
                 'email' => 'zxcv@gmail.com',
                 'email_verified_at' => now(),

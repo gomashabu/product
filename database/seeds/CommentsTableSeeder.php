@@ -14,7 +14,6 @@ class CommentsTableSeeder extends Seeder
     {
         \DB::table('comments')->insert([
             [
-                'id' => 1,
                 'comment' => "good Song!",
                 'post_id' => 1,
                 'user_id' => 1,
@@ -22,7 +21,6 @@ class CommentsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 2,
                 'comment' => "great job!",
                 'post_id' => 1,
                 'user_id' => 2,
@@ -30,7 +28,6 @@ class CommentsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 3,
                 'comment' => "incorrect in many ways",
                 'post_id' => 2,
                 'user_id' => 1,

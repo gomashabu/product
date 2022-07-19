@@ -45,7 +45,7 @@
     </div>
     <div class="outOfFooter">
         <div class="footer">
-            <a href="/posts/{{ $post->id }}">Back</a>
+            <a href="/">Back</a>
         </div>
     </div>
 @endsection

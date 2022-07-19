@@ -13,7 +13,6 @@ class ClaimsTableSeeder extends Seeder
     {
         \DB::table('claims')->insert([
             [
-                'id' => 1,
                 'claim' => "AmではなくAm7では？",
                 'row_number' => '2',
                 'post_id' => 1,
@@ -22,7 +21,6 @@ class ClaimsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 2,
                 'claim' => "歌詞が間違ってる",
                 'row_number' => '1',
                 'post_id' => 1,
@@ -31,7 +29,6 @@ class ClaimsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id' => 3,
                 'claim' => "コードの切り替わるタイミングが違う",
                 'row_number' => '2',
                 'post_id' => 1,
