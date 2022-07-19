@@ -22,9 +22,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/like/{post}', 'PostController@like')->name('like');
     Route::get('/unlike/{post}', 'PostController@unlike')->name('unlike');
     Route::get('/posts/{post}/claim', 'PostController@claim');
-    Route::put('/posts/{post}', 'PostController@update');
+    Route::put('/posts/{post}', 'PostController@storeUpdate');
     Route::put('/claim/{post}/{claim}/edit', 'PostController@updateClaim');
-    Route::post('/posts', 'PostController@store');
+    Route::post('/posts', 'PostController@storeUpdate');
     Route::post('/claim/{post}', 'PostController@storeClaim');
     Route::post('/posts/{post}/comment', 'PostController@storeComment');
     Route::delete('/posts/{post}', 'PostController@delete');

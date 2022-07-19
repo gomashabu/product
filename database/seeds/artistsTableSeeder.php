@@ -15,7 +15,7 @@ class ArtistsTableSeeder extends Seeder
         \DB::table('artists')->insert([
             [
                 'id' => 1,
-                'name' => 'The Beatles',
+                'name' => 'Franz Schubert',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -27,13 +27,7 @@ class ArtistsTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'ONE OK ROCK',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'id' => 4,
-                'name' => 'Alessandro Scarlatti',
+                'name' => 'Heinrich Werner',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

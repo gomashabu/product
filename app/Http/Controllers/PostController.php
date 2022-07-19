@@ -134,21 +134,12 @@ class PostController extends Controller
         return view('edit')->with(['post' => $post, 'artist' => $artist, 'song' => $song]);
     }
     
-    public function store(
+    public function storeUpdate(
         PostRequest $request,
         Post $post,
         Song $song,
         Artist $artist)
     {  
-        $input = $request->input();
-        $user_id = Auth::id();
-        $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
-        $this->storeOrUpdate($input, $IdInf, $post, $artist, $song, $user_id);
-        return redirect('/posts/' . $post->id);
-    }
-    
-    public function update(PostRequest $request, Post $post, Artist $artist, Song $song)
-    {
         $input = $request->input();
         $user_id = Auth::id();
         $IdInf = $this->GetIdIfExists($request, $post, $artist, $song);
@@ -162,7 +153,7 @@ class PostController extends Controller
         return redirect('/');
     }
     
-    public function search(Post $post, Artist $artist, Song $song, Request $request)
+    public function search(Post $post, Artist $artist, Song $song, Request $request, int $limit_count = 5)
     {
         // 検索フォームで入力された値を取得する
         $search = $request->input();
@@ -174,7 +165,7 @@ class PostController extends Controller
             ->with([
                 'posts' => $post->whereIn('song_id', $searched_ids['song'])->orWhere(function($query) use($searched_ids){
                     return $query->whereIn('artist_id', $searched_ids['artist']);
-                })->get(),
+                })->paginate($limit_count),
                 'songs' => $song->get(),
                 'artists' => $artist->get(),
                 'search' => $search,
