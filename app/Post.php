@@ -58,6 +58,31 @@ class Post extends Model
         return $posts; 
     }
     
+    public function getSongOfAnArtist($id, int $limit_count = 5)
+    {
+        return $this::withCount('likes')->where('artist_id', $id)->orderBy('likes_count', 'DESC')->paginate($limit_count);
+    }
+    
+    public function getRanking($rank, $id, int $limit_count = 5)
+    {
+        //$array[0]はランキングの題名、$array[1]はランキングの要素
+        $array=[ucfirst(strToLower(preg_replace('/([a-z])([A-Z])/', "$1 $2", $rank))), "rankContent"];
+        
+        switch($rank)
+        {
+            case "topSong":
+                $array[1] = $this->getPaginateTopByLimit();
+                break;
+            case "newSong":
+                $array[1] = $this->getPaginateByLimit();
+                break;
+            case "songsOfAnArtist":
+                $array = [Artist::find($id)['name'], $this->getSongOfAnArtist($id)];
+                break;
+        }
+        return $array;
+    }
+    
     public function artist()
     {
         return $this->belongsTo('App\Artist');

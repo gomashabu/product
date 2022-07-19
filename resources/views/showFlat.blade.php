@@ -7,13 +7,15 @@
 @section('content')
 <div class="spaceForNaavBar" style="margin-bottom: 80px;"></div>
 @if ($id == $post->user->id)
-    <div class="forPoster">
-        <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit this post</a>]</p>
-        <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" id="deleteButton">delete this post</button> 
-        </form>
+    <div class="aboveScore">
+        <div class="forPoster">
+            <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit this post</a>]</p>
+            <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" id="deleteButton">delete this post</button> 
+            </form>
+        </div>
     </div>
 @endif
 <div class='postTitle'>

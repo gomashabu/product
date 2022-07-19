@@ -83,12 +83,12 @@
                     <button type="submit" id="deleteButton">delete this post</button> 
                 </form>
             </div>
-            @endif
+        @endif
         </div>
         <div class='postTitle'>
             <h1>{{ $post->song->title }}</h1>
             <h3 id="byBetTitle">by</h3>
-            <h2>{{ $post->artist->name }}</h2>
+            <h2><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></h2>
             <br>
             <h6 class="float-right">posted by {{ $post->user->name }}</h6>
         </div>

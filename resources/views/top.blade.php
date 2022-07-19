@@ -10,7 +10,7 @@
         <div class="forLoggedIn">
             <div class="right">
                 <p class="create">[<a href='/posts/create'>create</a>]</p>
-                <p class="mysongs">[<a href='/posts/mysongs'>my songs</a>]</p>
+                <p class="myPage">[<a href='/posts/myPage'>my page</a>]</p>
             </div>
         </div>
     @else
@@ -30,17 +30,17 @@
             <input id="searchButton" type="submit" value="検索">
         </form>
    </div>
-   <br><br>
-    
+   <br>
     <br><br>
     <div class="rankings">
         <div class = "ranking">
-            <h3 class="rankTitle">Top songs</h3>
+            <h3 class="rankTitle"><a href="/ranking/topSong/null">Top songs</a></h3>　
             @foreach ($TopPosts as $post_key => $post)
                 <div class='TopPosts'>
                     <p class="songInf">{{$TopPosts->firstItem()+$post_key}}.</p>
                     <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                    <p class="songInf">- {{ $post->artist->name }}</p>
+                    <p class="songInf hyphen">-</p>
+                    <p class="songInf"><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></p>
                     <br>
                     <p class="songInf space">scoretype : {{ $post->score_type }}</p>
                     <br>
@@ -50,12 +50,13 @@
             @endforeach
         </div>
         <div class = "ranking">
-            <h3 class="rankTitle">New songs</h3>
+            <h3 class="rankTitle"><a href="/ranking/newSong/null">New songs</a></h3>
             @foreach ($NewPosts as $post_key => $post)
                 <div class='TopNewPosts'>
                     <p class="songInf">{{$NewPosts->firstItem()+$post_key}}.</p>
                     <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                    <p class="songInf">- {{ $post->artist->name }}</p>
+                    <p class="songInf hyphen">-</p>
+                    <p class="songInf"><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></p>
                     <br>
                     <p class="songInf space">scoretype : {{ $post->score_type }}</p>
                     <br>
@@ -65,8 +66,4 @@
             @endforeach
         </div>
     </div>
-
-{{-- <div class='paginate'>
-        {{ $posts->links() }}
-    </div> --}}
 @endsection

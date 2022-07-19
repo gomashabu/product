@@ -32,7 +32,9 @@
                 <div class='TopNewPosts'>
                     <p class="songInf">{{$posts->firstItem()+$post_key}}.</p>
                     <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                    <p class="songInf">- {{ $post->artist->name }}</p>
+                    <br>
+                    <p class="songInf space">-</p>
+                    <p class="songInf"><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></p>
                     <br>
                     <p class="songInf space">scoretype : {{ $post->score_type }}</p>
                     <br>
@@ -47,7 +49,9 @@
                 <div class='songYouLiked'>
                     <p class="songInf">{{$posts->firstItem()+$post_key}}.</p>
                     <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                    <p class="songInf">- {{ $post->artist->name }}</p>
+                    <br>
+                    <p class="songInf space">-</p>
+                    <p class="songInf"><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></p>
                     <br>
                     <p class="songInf space">scoretype : {{ $post->score_type }}</p>
                     <br>
@@ -64,8 +68,10 @@
                     <p class="songInf">{{ $post->comments->where('user_id', Auth::user()->id)->pluck('comment') }}</p>
                     <br>
                     <div class="postInfo">
-                        <a　class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                        <p class="songInf">- {{ $post->artist->name }}</p>
+                        <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
+                        <br>
+                        <p class="songInf">-</p>
+                        <p class="songInf"><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></p>
                         <br>
                         <p class="songInf">scoretype : {{ $post->score_type }}</p>
                         <br>

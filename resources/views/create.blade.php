@@ -1,11 +1,16 @@
 @extends('layouts.app')　　
 
 @section('css')
-    {{ asset('css/edit.css') }}
+    {{ asset('css/create.css') }}
 @endsection
 
 @section('content')
-    <div class="spaceForNaavBar" style="margin-bottom: 80px;"></div>    
+    <div class="forLoggedIn">
+        <div class="right">
+            <p class="create">[{{ Auth::user()->name }}]</p>
+            <p class="myPage">[<a href='/posts/myPage'>my page</a>]</p>
+        </div>
+    </div>  
     <h1 class="title"> Create a new score</h1>
     <form action="/posts" method="POST">
         @csrf

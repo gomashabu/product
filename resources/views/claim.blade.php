@@ -50,32 +50,32 @@
                                 <option value='symbol'>Chord Symbols (e.g. C#m, G7)</option>
                                 <option value='numeral'>Numeral Chords (e.g. Im, V7)</option>
                             </select>
-                            </div>
-                        @endif
-                    <div id='divSelect'>
+                        </div>
+                    @endif
+                <div id='divSelect'>
+                </div>
+            </div>
+        </div>
+        <div class="changeCharSize">
+            <p>文字サイズの変更</p>
+            <div class="sizeButtonWithText">
+                <div>
+                    <p>コード</p>
+                    <p>歌詞</p>
+                </div>
+                <div class="sizeButton">
+                    <div class="chordSizeButton">
+                        <button type="button" onclick="changeSize('chord', '+')">+</button>
+                        <button type="button" onclick="changeSize('chord', '-')">-</button>
+                    </div>
+                    <div class="lyricsSizeButton">
+                        <button type="button" onclick="changeSize('lyrics', '+')">+</button>
+                        <button type="button" onclick="changeSize('lyrics', '-')">-</button>
                     </div>
                 </div>
             </div>
-            <div class="changeCharSize">
-                <p>文字サイズの変更</p>
-                <div class="sizeButtonWithText">
-                    <div>
-                        <p>コード</p>
-                        <p>歌詞</p>
-                    </div>
-                    <div class="sizeButton">
-                        <div class="chordSizeButton">
-                            <button type="button" onclick="changeSize('chord', '+')">+</button>
-                            <button type="button" onclick="changeSize('chord', '-')">-</button>
-                        </div>
-                        <div class="lyricsSizeButton">
-                            <button type="button" onclick="changeSize('lyrics', '+')">+</button>
-                            <button type="button" onclick="changeSize('lyrics', '-')">-</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @if ($id == $post->user->id)
+        </div>
+        @if ($id == $post->user->id)
             <div class="forPoster">
                 <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit this post</a>]</p>
                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">
@@ -84,23 +84,23 @@
                     <button type="submit" id="deleteButton">delete this post</button> 
                 </form>
             </div>
-            @endif
-        </div>
-        <div class='postTitle'>
-            <h1>{{ $post->song->title }}</h1>
-            <h3 id="byBetTitle">by</h3>
-            <h2>{{ $post->artist->name }}</h2>
-            <br>
-            <h6 class="float-right">posted by {{ $post->user->name }}</h6>
-        </div>
-        <p id = "showChordsWithLyrics"></p>
-        <div class="footer">
-            <a href="/posts/{{ $post->id }}">Back</a>
-        </div>
+        @endif
     </div>
-    <form  method="POST" id="form">
-        @csrf
-    </form>
+    <div class='postTitle'>
+        <h1>{{ $post->song->title }}</h1>
+        <h3 id="byBetTitle">by</h3>
+        <h2><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></h2>
+        <br>
+        <h6 class="float-right">posted by {{ $post->user->name }}</h6>
+    </div>
+    <p id = "showChordsWithLyrics"></p>
+    <div class="footer">
+        <a href="/posts/{{ $post->id }}">Back</a>
+    </div>
+</div>
+<form  method="POST" id="form">
+    @csrf
+</form>
     <script defer>
         const postScore = `<?php echo $post->lyrics_with_chords; ?>`;
         var key = "{{ $post->key }}";
@@ -213,7 +213,7 @@
             /* 何行目のclaimかをpタグで表示 */
             const rowNumberP= document.createElement('p');
                 rowNumberP.id = "rowNumberP";
-                rowNumberP.innerText = i + "行目への指摘";
+                rowNumberP.innerText = (i + 1) + "行目への指摘";
             form.appendChild(rowNumberP);
             /* row_numberを自動で入力しておくinput */
             const rowNumberInput = document.createElement('input');
@@ -294,7 +294,7 @@
                 rows[claimRow].setAttribute('data-target', "#claimModal" + claimRow);
                 rows[claimRow].classList.add('claim')
             });
-            for(let i=1; i<rows.length; i++){
+            for(let i=0; i<rows.length; i++){
                 if(@json($claimOfThisUser)[i]){
                     /*　注釈編集をする行を指定するボタン作成 */
                     claimButton(i,"への指摘を編集", "edit");
@@ -310,7 +310,7 @@
             const rows = document.querySelectorAll('.row');
             var claimButton = document.createElement('button');
                 claimButton.id = "claimButton" + i;
-                claimButton.innerText = i + "行目" + text;
+                claimButton.innerText = (i + 1) + "行目" + text;
                 claimButton.type = 'button';
                 claimButton.setAttribute('class', "claimButton");
                 claimButton.setAttribute('onclick', "createTextarea(" + i + ", '" + createOrEdit + "')");

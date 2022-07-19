@@ -1,3 +1,23 @@
+.forLoggedIn{
+    position: relative;
+    width: 765px;
+    margin: 15px auto 10px auto;
+    height: 65px;
+}
+
+.right{
+   position: absolute;
+   top: 0;
+   right: 0;
+   border: solid #705144 0.5px;
+   box-shadow: 1px 2.5px 5px #BC9176;
+   background-color: #FFF7F2;
+}
+
+.right p{
+    margin:0.3rem 0.3rem ;
+}
+
 p{
   margin: 0;
 }

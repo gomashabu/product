@@ -77,6 +77,10 @@
     margin-bottom: 0; 
 }
 
+.hyphen{
+    margin: 0 0.5ch;
+}
+
 .space{
     margin-left: 2ch;
 }

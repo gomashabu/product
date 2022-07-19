@@ -177,6 +177,19 @@ class PostController extends Controller
             ]);
     }
     
+    public function ranking($rank, $id,  Post $post, Artist $artist, Song $song, int $limit_count = 5)
+    {
+        $like_count = Post::withCount('likes')->get();
+        return view('searchResults')
+            ->with([
+                //$posts[0]はランキングの題名、$posts[1]はランキングの要素
+                'posts' => $post->getRanking($rank, $id),
+                'songs' => $song->get(),
+                'artists' => $artist->get(),
+                'like_count' => $like_count
+            ]);
+    }
+    
     public function like(Post $post, Request $request, Like $like){
         $like->post_id=$post->id;
         $like->user_id=Auth::user()->id;

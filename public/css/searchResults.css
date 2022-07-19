@@ -50,7 +50,7 @@
 
 .songsSearched{
     margin:  0 auto; 
-    padding: 20px 40px;
+    padding: 20px 40px 0px 40px;
     width: 765px;
     background-color: #FFF7F2;
     box-shadow: 1px 2.5px 5px #BC9176;
@@ -67,12 +67,12 @@
 
 .rankTitle{
     background-color: #e8f1fa;
-    margin: -20px -40px 10px -40px;
+    margin: 0px -10px 10px -10px;
     padding: 12px 41px;
 }
 
 .post{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .songInf{
@@ -80,8 +80,21 @@
     margin-bottom: 0; 
 }
 
+.hyphen{
+    margin: 0 0.5ch;
+}
+
+.postSongTitle{
+    margin-left: 1ch;
+}
+
 .space{
-    margin-left: 2ch;
+    margin-left: 3ch;
+    margin-bottom: 20px;
+}
+
+.scoreType{
+    margin-left: 1ch;
 }
 
 h3 {
@@ -106,6 +119,11 @@ h3 {
 
 .artist h3 {
     white-space: nowrap;
+}
+
+.paginate{
+    margin: 0 auto;
+    width: 200px;
 }
 
 .outOfFooter{

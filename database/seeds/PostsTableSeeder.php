@@ -133,7 +133,38 @@ Röslein auf der Heiden.",
                 'key' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'score_type' => "Lyrics with chords",
+                'lyrics_with_chords' =>  "Sah ein Knab' ein Röslein stehn,
+Röslein auf der Heiden,
+War so jung und morgenschön,
+Lief er schnell, es nah zu sehn,
+Sah's mit vielen Freuden.
+Röslein, Röslein, Röslein rot,
+Röslein auf der Heiden.
+Knabe sprach: ich breche dich,
+Röslein auf der Heiden!
+Röslein sprach: ich steche dich,
+Dass du ewig denkst an mich,
+Und ich will's nicht leiden.
+Röslein, Röslein, Röslein rot,
+Röslein auf der Heiden.
+Und der wilde Knabe brach
+'s Röslein auf der Heiden;
+Röslein wehrte sich und stach,
+Half ihm doch kein Weh und Ach,
+Musst' es eben leiden.
+Röslein, Röslein, Röslein rot,
+Röslein auf der Heiden.",
+                'flat_score' => '',
+                'song_id' => 1,
+                'artist_id' => 1,
+                'user_id' => 2,
+                'key' => 'C',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             
         ]);
     }

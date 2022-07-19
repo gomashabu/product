@@ -9,7 +9,7 @@
         <div class="forLoggedIn">
             <div class="right">
                 <p class="create">[<a href='/posts/create'>create</a>]</p>
-                <p class="mysongs">[<a href='/posts/mysongs'>my songs</a>]</p>
+                <p class="myPage">[<a href='/posts/myPage'>my page</a>]</p>
             </div>
         </div>
     @else
@@ -29,19 +29,27 @@
             <input id="searchButton" type="submit" value="検索">
         </form>
     </div>
-    <br><br>
-    <br><br>
+    <br><br><br>
     <div class = "songsSearched">
-        <h3 class="rankTitle">Search results</h3>
-        @foreach ($posts as $post_key => $post)
-            <div class='post'>
-                <p class="songInf">{{$posts->firstItem()+$post_key}}.</p>
-                <a class="songInf" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
-                <p class="songInf">- {{ $post->artist->name }}</p>
-                <p class="songInf space">scoretype : {{ $post->score_type }}</p>
-                <p class="songInf space">{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }} like(s)</p>
-            </div>
-        @endforeach
+        <div class = "ranking">
+            @if(isset($search))
+            <h3 class="rankTitle">Search results</h3>
+            @else
+            <h3 class="rankTitle">{{ $posts[0] }}</h3>
+            @endif
+            @foreach ($posts[1] as $post_key => $post)
+                <div class='post'>
+                    <p class="songInf number">{{$posts[1]->firstItem()+$post_key}}.</p>
+                    <a class="songInf postSongTitle" href="/posts/{{ $post->id }}">{{ $post->song->title }}</a>
+                    <p class="songInf hyphen">-</p>
+                    <p class="songInf"><a href="/ranking/songsOfAnArtist/{{ $post->artist->id }}">{{ $post->artist->name }}</a></p>
+                    <br>
+                    <p class="songInf space" id="scoreType">scoretype : {{ $post->score_type }}</p>
+                    <p class="songInf space">{{ $like_count->where('id', $post->id)->pluck('likes_count')[0] }} like(s)</p>
+                </div>
+            @endforeach
+        </div>
+        <div class='paginate'>{{ $posts[1]->links() }}</div>
     </div>
     <div class="outOfFooter">
         <div class="footer">
