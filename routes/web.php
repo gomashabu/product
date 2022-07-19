@@ -21,8 +21,11 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/posts/{post}/edit', 'PostController@edit');
     Route::get('/like/{post}', 'PostController@like')->name('like');
     Route::get('/unlike/{post}', 'PostController@unlike')->name('unlike');
+    Route::get('/posts/{post}/claim', 'PostController@claim');
     Route::put('/posts/{post}', 'PostController@update');
+    Route::put('/claim/{post}/{claim}/edit', 'PostController@updateClaim');
     Route::post('/posts', 'PostController@store');
+    Route::post('/claim/{post}', 'PostController@storeClaim');
     Route::post('/posts/{post}/comment', 'PostController@storeComment');
     Route::delete('/posts/{post}', 'PostController@delete');
     

@@ -25,10 +25,11 @@ class Comment extends Model
         return $this->belongsTo('App\User');
     }
     
-    public function getPaginateByLimit(int $limit_count = 5)
+    public function getPaginateByLimit($postid)
     {
+        $limit_count = 5;
         // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this::with('post')->orderBy('updated_at', 'DESC')->paginate($limit_count); 
+        return $this::with('post')->where('post_id', $postid)->orderBy('updated_at', 'DESC')->paginate($limit_count); 
     }
     
 }

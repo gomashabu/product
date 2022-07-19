@@ -62,7 +62,8 @@ trait PostTraits {
                          'flat_score'=>$input['flat_score'],
                          'song_id'=>$song['id'],
                          'artist_id'=>$artist['id'],
-                         'user_id'=>$user_id])->save();
+                         'user_id'=>$user_id,
+                         'key' =>$input['key']])->save();
         }elseif($IdInf['artist_id_for_title'] == null){//song, post保存
             $song->fill(['title'=>$input['song'],
                          'artist_id'=>$IdInf['artist_id']])->save();
@@ -71,14 +72,16 @@ trait PostTraits {
                          'flat_score'=>$input['flat_score'],
                          'song_id'=>$song['id'],
                          'artist_id'=>$IdInf['artist_id'],
-                         'user_id'=>$user_id])->save();
+                         'user_id'=>$user_id,
+                         'key' =>$input['key']])->save();
         }else{//post保存
             $post->fill(['score_type'=>$input['score_type'],
                          'lyrics_with_chords'=>$input['lyrics_with_chords'],
                          'flat_score'=>$input['flat_score'],
                          'song_id'=>$IdInf['song_id'],
                          'artist_id'=>$IdInf['artist_id'],
-                         'user_id'=>$user_id])->save();
+                         'user_id'=>$user_id,
+                         'key' =>$input['key']])->save();
         }
     }
     

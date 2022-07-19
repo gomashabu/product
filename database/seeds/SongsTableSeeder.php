@@ -22,7 +22,7 @@ class SongsTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'title' => 'Smells Like Teen Spirit',
+                'title' => 'O cessate di piagarmi',
                 'artist_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),

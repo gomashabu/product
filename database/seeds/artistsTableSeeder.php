@@ -21,7 +21,7 @@ class ArtistsTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'Nirvana',
+                'name' => 'Alessandro Scarlatti',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

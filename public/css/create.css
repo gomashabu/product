@@ -1,0 +1,97 @@
+p{
+  margin: 0;
+}
+
+.title{
+  margin:  14px auto;
+  padding: 12px 51px;
+  border: solid #705144 0.5px;
+  width: 765px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
+
+.boforeScore{
+  margin:  10px auto;
+  padding: 2ch 2ch 3ch 5ch;
+  border: solid #705144 0.5px;
+  width: 765px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;  
+}
+
+.song_imformation{
+    display:flex;
+}
+
+.text{
+    margin-top: 5px;
+}
+.text h4{
+    padding-right: 90px;
+    margin-bottom: 30px;
+}
+
+.inputText input{
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.score_type h4{
+    display: inline-block;
+    padding-right: 100px
+}
+
+.form-check{
+    padding-right: 70px
+}
+
+.scores{
+  margin:  20px auto 10px auto;
+  padding: 2ch 2ch 13ch 5ch;
+  border: solid #705144 0.5px;
+  width: 765px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;  
+}
+
+.scoreTop{
+    display: flex;
+    margin-top: 25px;
+    padding-bottom: 10px;
+}
+
+.scoreTop h3{
+    margin: 0 270px 10px 0;
+}
+
+.scoreTop h5{
+    margin: 43px 6px 0px 0;
+}
+
+.scoreTop input{
+    width: 40px;
+    padding: 5px;
+    height: 30px;
+    margin: 40px 0 0 0;
+}
+
+.submitButton{
+    margin-left: 577px;
+    margin-top: 5px;
+}
+
+.footer{
+    width:765px;
+    margin: 0px auto;
+}
+
+.back{
+  margin-top: 10px;
+  margin-left: 0;
+  padding: 10px 32px;
+  border: solid #705144 0.5px;
+  width: 100px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
