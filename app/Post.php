@@ -34,7 +34,7 @@ class Post extends Model
         return $this::withCount('likes')->orderBy('likes_count', 'DESC')->paginate($limit_count); 
     }
     
-    public function getMySongByLimit(int $limit_count = 10)
+    public function getMySongByLimit(int $limit_count = 5)
     {
         $auths = Auth::id();
         return $this::with('artist')->where('user_id', $auths)->orderBy('updated_at', 'DESC')->paginate($limit_count); 
@@ -81,6 +81,13 @@ class Post extends Model
             return $artist_still_exist[0];
         }
         return 'yes';
+    }
+    
+    public function search($searched_ids, int $limit_count = 10){
+        $posts = $this::withCount('likes')->whereIn('song_id', $searched_ids['song'])->orWhere(function($query) use($searched_ids){
+                    return $query->whereIn('artist_id', $searched_ids['artist']);
+                })->orderBy('likes_count', 'DESC')->paginate($limit_count);
+        return $posts;
     }
   
 }
