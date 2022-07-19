@@ -15,7 +15,7 @@ class SongsTableSeeder extends Seeder
         \DB::table('songs')->insert([
             [
                 'id' => 1,
-                'title' => 'Yesterday',
+                'title' => 'Heidenroslein',
                 'artist_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -29,7 +29,7 @@ class SongsTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'title' => 'Smells Like Teen Spirit',
+                'title' => 'Heidenroslein',
                 'artist_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -37,7 +37,7 @@ class SongsTableSeeder extends Seeder
             [
                 'id' => 4,
                 'title' => 'Son tutta duolo',
-                'artist_id' => 4,
+                'artist_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

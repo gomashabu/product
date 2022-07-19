@@ -4,6 +4,7 @@
 @section('css')
     {{ asset('css/top.css') }}
 @endsection
+
 @section('content')
     @if (Auth::check())
         <div class="forLoggedIn">

@@ -36,7 +36,6 @@
     margin-left: 5px;
 }
 
-
 .searchBox:focus {
     outline: none;
 }
@@ -49,13 +48,13 @@
     margin-top: 20px;
 }
 
-
-.rankings{
+.songsSearched{
     margin:  0 auto; 
-    width: fit-content;
-    display: flex;
+    padding: 20px 40px;
+    width: 765px;
     background-color: #FFF7F2;
     box-shadow: 1px 2.5px 5px #BC9176;
+    border: solid #705144 0.5px;
     justify-content:space-evenly;    
 }
 
@@ -68,8 +67,12 @@
 
 .rankTitle{
     background-color: #e8f1fa;
-    margin:0 -10px;
-    padding: 10px 10px;
+    margin: -20px -40px 10px -40px;
+    padding: 12px 41px;
+}
+
+.post{
+    margin-bottom: 10px;
 }
 
 .songInf{
@@ -90,7 +93,6 @@ h3 {
     display: flex;
     justify-content:space-between;
     width: 350px;
-    height: 100%;
     margin: 5px auto;
 }
 
@@ -106,3 +108,17 @@ h3 {
     white-space: nowrap;
 }
 
+.outOfFooter{
+    width: 765px;
+    margin:0 auto;
+}
+
+.footer{
+  margin-top: 20px;
+  margin-left: 0;
+  padding: 10px 32px;
+  border: solid #705144 0.5px;
+  width: 100px;
+  background-color: #FFF7F2;
+  box-shadow: 1px 2.5px 5px #BC9176;
+}
